@@ -1,0 +1,20 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[url "https://"]
+[push]
+	default = current
+[credential]
+	helper = osxkeychain
+[color]
+	ui = true
+[alias]
+	prune = fetch --prune
+	undo = reset --soft HEAD^1
+	stash-all = stash save --include-untracked
+	log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	push-u = ![[ $(git config \"branch.$(git rev-parse --abbrev-ref HEAD).merge\") = '' ]] && git push -u || git push
+	delete-merged-branches = !git branch --merged master | grep -v -e 'master' -e '\\*' | xargs -n 1 git branch -d && git remote prune origin
+[commit]

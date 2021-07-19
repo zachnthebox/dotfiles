@@ -1,0 +1,3 @@
+#compdef github-repo
+
+compadd `ls -1 ~/git | sed "s/[\* ]//g"`
